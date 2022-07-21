@@ -3,6 +3,7 @@ package gcp_api.gcp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import gcp_api.gcp.repository.RMIPotRepository;
@@ -12,8 +13,6 @@ public class PotController {
 
 	@Autowired
 	private ApplicationContext appContext;
-
-
 
 	@GetMapping("/")
 	public String index() {
@@ -35,11 +34,10 @@ public class PotController {
 		return rmiRepository.save();
 	}
 
-	@GetMapping("/consume")
-	public String consume() {
+	@GetMapping("/consume/{product}/{quantity}")
+	public String consume(@PathVariable String product, @PathVariable Integer quantity) {
 		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
-
-		return rmiRepository.consume();
+		return rmiRepository.consume(product, quantity);
 	}
 
 	@GetMapping("/recover")

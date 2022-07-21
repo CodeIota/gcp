@@ -1,36 +1,45 @@
 package gcp_api.gcp.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import gcp_api.gcp.services.PotServices;
 
 public class PotRepository implements RMIPotRepository {
 
+    private PotServices potServices = new PotServices();
 
     @Override
-    public String fill() {
+    public synchronized String fill() {
         return "fill";
     }
 
     @Override
-    public String consume() {
-        return "consume";
+    @Autowired
+    public synchronized String consume(String product, Integer quantity) {
+        try {
+            return potServices.consumeProduct(product, quantity);
+        } catch (Exception e) {
+            return e.toString() + " fallo en el repositorio";
+        }
     }
 
     @Override
-    public String consult()  {
+    public synchronized String consult()  {
         return "consult";
     }
 
     @Override
-    public String save()  {
+    public synchronized String save()  {
         return "save";
     }
 
     @Override
-    public String recover()  {
+    public synchronized String recover()  {
         return "recover";
     }
 
     @Override
-    public String index() {
+    public synchronized String index() {
         return "Hello, world!";
     }
     

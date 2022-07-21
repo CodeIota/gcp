@@ -13,7 +13,6 @@ public class GcpApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GcpApplication.class, args);
 
-		// System.out.println(rmiRepository.index());
 	}
 
 	@Deprecated
