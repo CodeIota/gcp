@@ -6,27 +6,32 @@ public class PotRepository implements RMIPotRepository {
 
     @Override
     public String fill() {
-        return null;
+        return "fill";
     }
 
     @Override
     public String consume() {
-        return null;
+        return "consume";
     }
 
     @Override
     public String consult()  {
-        return "Hello, world!";
+        return "consult";
     }
 
     @Override
     public String save()  {
-        return null;
+        return "save";
     }
 
     @Override
     public String recover()  {
-        return null;
+        return "recover";
+    }
+
+    @Override
+    public String index() {
+        return "Hello, world!";
     }
     
 }

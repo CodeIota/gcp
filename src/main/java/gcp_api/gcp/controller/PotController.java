@@ -1,39 +1,59 @@
 package gcp_api.gcp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import gcp_api.gcp.repository.RMIPotRepository;
 
 @RestController
 public class PotController {
 
+	@Autowired
+	private ApplicationContext appContext;
+
+
+
 	@GetMapping("/")
 	public String index() {
-		return "Greetings from Spring Boot!";
+		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
+		return rmiRepository.index();
 	}
 
 	@GetMapping("/fill")
 	public String fill() {
-		return "Greetings from fill!";
+		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
+
+		return rmiRepository.fill();
 	}
 
 	@GetMapping("/save")
 	public String save() {
-		return "Greetings from save!";
+		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
+
+		return rmiRepository.save();
 	}
 
 	@GetMapping("/consume")
 	public String consume() {
-		return "Greetings from consume!";
+		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
+
+		return rmiRepository.consume();
 	}
 
 	@GetMapping("/recover")
 	public String recover() {
-		return "Greetings from recover!";
+		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
+
+		return rmiRepository.recover();
 	}
 
 	@GetMapping("/consult")
 	public String consult() {
-		return "Greetings from consult!";
+		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
+
+		return rmiRepository.consult();
 	}
 
 }

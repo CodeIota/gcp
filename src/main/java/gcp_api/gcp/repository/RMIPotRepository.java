@@ -7,6 +7,7 @@ public interface RMIPotRepository {
     public String consult();
     public String save();
     public String recover();
+    public String index();
     
 
 }

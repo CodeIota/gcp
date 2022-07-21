@@ -11,10 +11,9 @@ import gcp_api.gcp.repository.RMIPotRepository;
 public class GcpApplication {
 
 	public static void main(String[] args) {
-		RMIPotRepository rmiRepository = SpringApplication.run(GcpApplication.class, args)
-		.getBean(RMIPotRepository.class);
+		SpringApplication.run(GcpApplication.class, args);
 
-		System.out.println(rmiRepository.consult());
+		// System.out.println(rmiRepository.index());
 	}
 
 	@Deprecated
