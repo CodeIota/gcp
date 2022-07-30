@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import gcp_api.gcp.domain.ProductsPot;
 import gcp_api.gcp.repository.RMIPotRepository;
 
 @RestController
@@ -48,7 +49,7 @@ public class PotController {
 	}
 
 	@GetMapping("/consult")
-	public String consult() {
+	public ProductsPot consult() {
 		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
 
 		return rmiRepository.consult();

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -16,20 +17,33 @@ import gcp_api.gcp.domain.ProductsPot;
 @Service
 public class PotServices {
 
-    public String consumeProduct(String product, Integer quantity) {
+    public void consumeProduct(String product, Integer quantity) {
+        
+        updateProduct(product, quantity);
+        
+    }
 
-        return searchProduct(product);
+    public void refillProducs() {
 
-        // System.out.println("product=" + product + " --- quantity=" + quantity);
+        ObjectMapper mapper = new ObjectMapper();
 
-        // return "product=" + product + " quantity=" + quantity;
-        // return "----done----";
+        List<ProductsPot> listToJsonFile = new ArrayList<>();
+
+        ProductsPot productA = new ProductsPot("A", 60);
+        ProductsPot productB = new ProductsPot("B", 30);
+
+        listToJsonFile.add(productA);
+        listToJsonFile.add(productB);
+        try {
+            mapper.writeValue(new File("/home/rubendgomes/Documents/GitHub/gcp/src/main/resources/data/pot.json"), listToJsonFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
     
-    private String searchProduct(String product) {
+    private void updateProduct(String product, Integer quantity) {
         ObjectMapper mapper = new ObjectMapper();
-        ProductsPot returnedProduct = null;
-        String message = "";
         
         try (InputStream inputStream = new FileInputStream(new File("/home/rubendgomes/Documents/GitHub/gcp/src/main/resources/data/pot.json"))) {
             TypeReference<List<ProductsPot>> typeReference = new TypeReference<List<ProductsPot>> () {};
@@ -38,15 +52,25 @@ public class PotServices {
 
             for (ProductsPot p: products) {
                 if (p.getProduct().equals(product)) {
-                    returnedProduct = p;
-                    break;
+                    
+                    if (p != null && (p.getQuantity() - quantity >= 0)) {
+                        Integer newQuantity = p.getQuantity() - quantity;
+                        p.setQuantity(newQuantity);
+                        break;
+                    } else {
+                        // return "{\"message\":failed}";
+
+                    }
+
                 }
             }
-            message = "product " + returnedProduct.getProduct() + "quantity" + returnedProduct.getQuantity();
-            return message;
+
+            mapper.writeValue(new File("/home/rubendgomes/Documents/GitHub/gcp/src/main/resources/data/pot.json"), products);
+            // return "{\"message\":success}";
         } catch (IOException e) {
-            return e.toString();
+
         }
     }
+
 
 }
