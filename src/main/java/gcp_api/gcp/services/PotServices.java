@@ -68,7 +68,7 @@ public class PotServices {
             mapper.writeValue(new File("/home/rubendgomes/Documents/GitHub/gcp/src/main/resources/data/pot.json"), products);
             // return "{\"message\":success}";
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
