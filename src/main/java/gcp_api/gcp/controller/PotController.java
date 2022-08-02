@@ -49,7 +49,7 @@ public class PotController {
 	}
 
 	@GetMapping("/consult")
-	public ProductsPot consult() {
+	public String consult() {
 		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
 
 		return rmiRepository.consult();

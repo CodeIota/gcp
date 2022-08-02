@@ -1,5 +1,7 @@
 package gcp_api.gcp.repository;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import gcp_api.gcp.domain.ProductsPot;
@@ -28,8 +30,13 @@ public class PotRepository implements RMIPotRepository {
     }
 
     @Override
-    public synchronized ProductsPot consult()  {
-        return null;
+    public synchronized String consult()  {
+        try {
+            return potServices.jsonToString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 
     @Override
