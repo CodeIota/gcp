@@ -48,7 +48,9 @@ public class PotServices {
         try (InputStream inputStream = new FileInputStream(new File("/home/rubendgomes/Documents/GitHub/gcp/src/main/resources/data/pot.json"))) {
             TypeReference<List<ProductsPot>> typeReference = new TypeReference<List<ProductsPot>> () {};
             List<ProductsPot> products = mapper.readValue(inputStream, typeReference);
-
+            TypeReference<String> typeReference2 = new TypeReference<String>() {};
+            String data = mapper.readValue(inputStream, typeReference2);
+            System.out.println(data);
 
             for (ProductsPot p: products) {
                 if (p.getProduct().equals(product)) {
@@ -70,6 +72,7 @@ public class PotServices {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 

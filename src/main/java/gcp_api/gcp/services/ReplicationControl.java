@@ -21,8 +21,6 @@ public class ReplicationControl {
             2509
     );
 
-
-
     public void Run() throws Exception {
         if(!(Servidores.size() == Puertos.size())){
             throw new Exception("Error en el numero de puertos y servidores");
