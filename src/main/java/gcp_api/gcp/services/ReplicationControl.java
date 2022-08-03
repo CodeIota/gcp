@@ -1,13 +1,8 @@
 package gcp_api.gcp.services;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class ReplicationControl {
     // Enparejado con la lista de puerto, primera direccion con primer puerto
@@ -22,11 +17,14 @@ public class ReplicationControl {
     );
 
     public void Run() throws Exception {
+
+        System.out.println("servers:" + Servidores);
+        System.out.println("ports:" + Puertos);
         if(!(Servidores.size() == Puertos.size())){
             throw new Exception("Error en el numero de puertos y servidores");
         }
         List<PuertoConexion> conexiones = new ArrayList<>();
-        for (int i=0; i<Servidores.size(); i++){
+        for (int i=0; i < Puertos.size(); i++){
             conexiones.add(new PuertoConexion(Servidores.get(i), Puertos.get(i)));
             //Se consultan a todos los servidores de replicacion
             if(!conexiones.get(i).Recibir()){

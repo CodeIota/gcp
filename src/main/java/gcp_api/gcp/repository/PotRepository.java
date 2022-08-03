@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import gcp_api.gcp.domain.ProductsPot;
+// import gcp_api.gcp.domain.ProductsPot;
 import gcp_api.gcp.services.PotServices;
 
 public class PotRepository implements RMIPotRepository {

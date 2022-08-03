@@ -19,6 +19,8 @@ import gcp_api.gcp.domain.ProductsPot;
 @Service
 public class PotServices {
 
+    LogWritter log = new LogWritter();
+
     public void consumeProduct(String product, Integer quantity) {
         
         updateProduct(product, quantity);
@@ -32,11 +34,13 @@ public class PotServices {
         List<ProductsPot> listToJsonFile = new ArrayList<>();
 
         ProductsPot productA = new ProductsPot("A", 60);
-        ProductsPot productB = new ProductsPot("B", 30);
+        ProductsPot productB = new ProductsPot("B", 40);
 
         listToJsonFile.add(productA);
         listToJsonFile.add(productB);
+
         try {
+            log.saveMessageOnFile("pot refilled successully");
             mapper.writeValue(new File("/home/rubendgomes/Documents/GitHub/gcp/src/main/resources/data/pot.json"), listToJsonFile);
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,9 +61,12 @@ public class PotServices {
                     if (p != null && (p.getQuantity() - quantity >= 0)) {
                         Integer newQuantity = p.getQuantity() - quantity;
                         p.setQuantity(newQuantity);
+                        log.saveMessageOnFile("client consumed product: " + product + " and quantity: " + quantity + " details: success");
+
                         break;
                     } else {
                         // return "{\"message\":failed}";
+                        log.saveMessageOnFile("client can't consume product: " + product + " and quantity: " + quantity + " details: failed");
 
                     }
 
@@ -72,6 +79,12 @@ public class PotServices {
             // return "{\"message\":success}";
         } catch (IOException e) {
             e.printStackTrace();
+            try {
+                log.saveMessageOnFile("server error");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            
         }
 
     }
@@ -86,6 +99,9 @@ public class PotServices {
         for (ProductsPot p: products) {
             data += mapper.writeValueAsString(p); 
         }
+
+        log.saveMessageOnFile("client consult current pot product - data: " + data);
+
 
         return data;
     }
