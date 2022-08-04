@@ -5,12 +5,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class PuertoConexion {
+public class PortConnexion {
     protected Socket socket;
     protected ObjectInputStream inputStream;
     protected ObjectOutputStream outputStream;
 
-    public PuertoConexion(String servidor, int puerto){
+    public PortConnexion(String servidor, int puerto){
         try {
             this.socket = new Socket(servidor, puerto);
             this.outputStream = new ObjectOutputStream(this.socket.getOutputStream());
@@ -20,19 +20,23 @@ public class PuertoConexion {
         }
     }
 
-    public boolean Recibir() throws IOException {
+    public boolean ReadBoolean() throws IOException {
         return this.inputStream.readBoolean();
     }
 
-    public void EnviarBoolean(boolean mensaje) throws IOException {
+    public void SendBoolean(boolean mensaje) throws IOException {
         this.outputStream.writeBoolean(mensaje);
     }
 
-    public void EnviarReplica(String replica) throws IOException {
-        this.outputStream.writeUTF(replica);
+    public void SendString(String message) throws IOException {
+        this.outputStream.writeUTF(message);
     }
 
-    public void Cerrar() throws IOException {
+    public String ReadString() throws IOException {
+        return this.inputStream.readUTF();
+    }
+
+    public void Close() throws IOException {
         this.outputStream.close();
     }
 

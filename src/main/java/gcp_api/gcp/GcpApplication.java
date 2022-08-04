@@ -1,5 +1,6 @@
 package gcp_api.gcp;
 
+import gcp_api.gcp.services.ReplicationControl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -11,8 +12,9 @@ import gcp_api.gcp.repository.RMIPotRepository;
 public class GcpApplication {
 
 	public static void main(String[] args) {
+		ReplicationControl control = new ReplicationControl();
+		control.run();
 		SpringApplication.run(GcpApplication.class, args);
-
 	}
 
 	@Deprecated
