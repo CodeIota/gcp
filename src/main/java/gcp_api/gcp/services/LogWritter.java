@@ -8,9 +8,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class LogWritter {
+    private static final String DireccionRuben = "/home/rubendgomes/Documents/GitHub/gcp/src/main/resources/logs/server_log.txt";
+    private static final String DireccionJose = "C:\\Users\\inmun\\source\\repos\\gcp\\src\\main\\resources\\logsserver_log.txt";
+    
     
     public void saveMessageOnFile(String message) throws IOException {
-        String route = "/home/rubendgomes/Documents/GitHub/gcp/src/main/resources/logs/server_log.txt";
+        String route = DireccionJose;
         File file = new File(route);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
