@@ -13,8 +13,10 @@ import gcp_api.gcp.repository.RMIPotRepository;
 public class GcpApplication {
 
 	public static void main(String[] args) {	
-		ReplicationControl control = new ReplicationControl();
-		control.start();
+		/*
+		*ReplicationControl control = new ReplicationControl();
+		*control.start();
+		*/
 		SpringApplication.run(GcpApplication.class, args);
 	}
 

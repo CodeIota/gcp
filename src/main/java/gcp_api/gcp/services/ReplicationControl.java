@@ -35,14 +35,6 @@ public class ReplicationControl extends Thread {
     protected ObjectOutputStream outputStream;
     protected boolean flag = true;
 
-    public ReplicationControl(){
-        try {
-            serverSocket = new ServerSocket(LocalPort);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void BackUp() throws Exception {
         ValidatePorts();
         List<PortConnexion> conexiones = new ArrayList<>();
@@ -93,13 +85,13 @@ public class ReplicationControl extends Thread {
             RestorePot(BackUps.get(0));
         }
     }
-
-    /* (non-Javadoc)
-     * @see java.lang.Thread#run()
-     */
+    
     @Override
     public void run() {
         try{
+            if (serverSocket == null) {
+                serverSocket = new ServerSocket(LocalPort);
+            }
             while (true){
                 this.localsocket = null;
                 System.out.println("Escuchando");
