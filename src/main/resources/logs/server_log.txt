@@ -17,3 +17,10 @@
 [2022/08/04 20:58:48] - client consult current pot product - data: {"product":"A","quantity":60}{"product":"B","quantity":40}
 [2022/08/04 21:05:37] - client consult current pot product - data: {"product":"A","quantity":60}{"product":"B","quantity":40}
 [2022/08/04 21:22:02] - client consult current pot product - data: {"product":"A","quantity":60}{"product":"B","quantity":40}
+[2022/08/04 23:54:24] - client consult current pot product - data: {"product":"A","quantity":60}{"product":"B","quantity":40}
+[2022/08/04 23:54:32] - client consumed product: A and quantity: 5 details: success
+[2022/08/04 23:54:34] - client consult current pot product - data: {"product":"A","quantity":55}{"product":"B","quantity":40}
+[2022/08/04 23:54:42] - client consumed product: B and quantity: 5 details: success
+[2022/08/04 23:54:44] - client consult current pot product - data: {"product":"A","quantity":55}{"product":"B","quantity":35}
+[2022/08/04 23:54:49] - pot refilled successully
+[2022/08/04 23:54:51] - client consult current pot product - data: {"product":"A","quantity":60}{"product":"B","quantity":40}
