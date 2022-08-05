@@ -1,5 +1,7 @@
 package gcp_api.gcp.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +30,14 @@ public class PotController {
 	}
 
 	@GetMapping("/save")
-	public String save() {
+	public void save() {
 		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
 
-		return rmiRepository.save();
+		try {
+			rmiRepository.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@GetMapping("/consume/{product}/{quantity}")
@@ -41,10 +47,14 @@ public class PotController {
 	}
 
 	@GetMapping("/recover")
-	public String recover() {
+	public void recover() {
 		RMIPotRepository rmiRepository = appContext.getBean(RMIPotRepository.class);
 
-		return rmiRepository.recover();
+		try {
+			rmiRepository.recover();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@GetMapping("/consult")

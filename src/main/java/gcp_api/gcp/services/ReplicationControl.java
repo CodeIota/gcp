@@ -36,20 +36,32 @@ public class ReplicationControl extends Thread {
         ValidatePorts();
         List<PortConnexion> conexiones = new ArrayList<>();
         for (int i = 0; i < Ports.size(); i++){
+            System.out.println("estoy aqui con i: " + i);
             conexiones.add(new PortConnexion(Servers.get(i), Ports.get(i)));
             //Se manda el comando de Backup
             conexiones.get(i).SendString(CommandBackUp);
             //Se consulta a cada servidor de replicacion si aprueba (booleano)
-            if(!conexiones.get(i).ReadBoolean()){
+            System.out.println("Envio "+CommandBackUp+"Recibi algo?");
+
+            Boolean algo = conexiones.get(i).ReadBoolean();
+
+            System.out.println("Recibi algo 2? res: " + algo);
+
+
+            if(!algo){
+            System.out.println("Yes or not?");
+
                 //Se recibio una respuesta negativa se procede a abortar
                 for (int j=0; j<i; j++){
+                    System.out.println("Medio webo papi no procede");
+
                     //Se aborta el backup y se cierra la conexion
                     conexiones.get(j).SendBoolean(false);
                     conexiones.get(j).Close();
                 }
                 return;
             }
-        }
+        } 
         for (int i = 0; i< Servers.size(); i++){
             conexiones.get(i).SendBoolean(true);
             conexiones.get(i).SendString(GetPot());

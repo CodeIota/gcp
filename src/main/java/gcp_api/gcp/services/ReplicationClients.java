@@ -40,11 +40,12 @@ public class ReplicationClients extends Thread {
                     default -> System.out.println("Mensaje no Valido");
                 }
 
-                outputStream.close();
+                // outputStream.close();
             }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
+            System.out.println("explote :)");
         }
     }
 

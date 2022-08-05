@@ -2,6 +2,7 @@ package gcp_api.gcp.services;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -104,6 +105,15 @@ public class PotServices {
 
 
         return data;
+    }
+
+    public List<ProductsPot> jsonToList () throws StreamReadException, DatabindException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        InputStream inputStream = new FileInputStream(new File("/home/rubendgomes/Documents/GitHub/gcp/src/main/resources/data/pot.json"));
+        TypeReference<List<ProductsPot>> typeReference = new TypeReference<List<ProductsPot>> () {};
+        List<ProductsPot> products = mapper.readValue(inputStream, typeReference);
+
+        return products;
     }
 
 
