@@ -41,12 +41,12 @@ public class PotRepository implements RMIPotRepository {
 
     @Override
     public synchronized void save() throws IOException  {
-        ReplicationServer.BackUp();
+        //ReplicationServer.BackUp();
     }
 
     @Override
     public synchronized void recover() throws IOException  {
-        ReplicationServer.Restore();
+        //ReplicationServer.Restore();
     }
 
     @Override
