@@ -45,15 +45,12 @@ public class ReplicationControl extends Thread {
 
             Boolean algo = conexiones.get(i).ReadBoolean();
 
-            System.out.println("Recibi algo 2? res: " + algo);
 
 
             if(!algo){
-            System.out.println("Yes or not?");
 
                 //Se recibio una respuesta negativa se procede a abortar
                 for (int j=0; j<i; j++){
-                    System.out.println("Medio webo papi no procede");
 
                     //Se aborta el backup y se cierra la conexion
                     conexiones.get(j).SendBoolean(false);
