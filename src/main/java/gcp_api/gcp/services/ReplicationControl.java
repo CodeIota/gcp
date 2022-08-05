@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.tomcat.jni.ProcErrorCallback;
+
 public class ReplicationControl extends Thread {
 
     private static final String CommandBackUp = "backup";
@@ -31,6 +33,15 @@ public class ReplicationControl extends Thread {
     protected Socket localsocket;
     protected ObjectInputStream inputStream;
     protected ObjectOutputStream outputStream;
+    protected boolean flag = true;
+
+    public ReplicationControl(){
+        try {
+            serverSocket = new ServerSocket(LocalPort);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void BackUp() throws Exception {
         ValidatePorts();
@@ -86,13 +97,17 @@ public class ReplicationControl extends Thread {
         }
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Thread#run()
+     */
     @Override
     public void run() {
         try{
-            this.serverSocket = new ServerSocket(LocalPort);
             while (true){
-                this.localsocket = new Socket();
-                this.localsocket = this.serverSocket.accept();
+                this.localsocket = null;
+                System.out.println("Escuchando");
+                this.localsocket = serverSocket.accept();
+                System.out.println("Conectado");
                 this.inputStream = new ObjectInputStream(this.localsocket.getInputStream());
                 this.outputStream = new ObjectOutputStream(this.localsocket.getOutputStream());
 
@@ -103,7 +118,7 @@ public class ReplicationControl extends Thread {
                 }
 
                 this.localsocket.close();
-            }
+            }                
         }
         catch (Exception e){
             System.out.println(e.getMessage());

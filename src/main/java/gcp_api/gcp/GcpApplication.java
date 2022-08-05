@@ -12,13 +12,10 @@ import gcp_api.gcp.repository.RMIPotRepository;
 @SpringBootApplication
 public class GcpApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GcpApplication.class, args); // no llega a esta linea 
-
-
-		// ReplicationControl control = new ReplicationControl();
-		// control.start();
-	
+	public static void main(String[] args) {	
+		ReplicationControl control = new ReplicationControl();
+		control.start();
+		SpringApplication.run(GcpApplication.class, args);
 	}
 
 	@Deprecated
