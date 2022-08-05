@@ -44,7 +44,8 @@ public class ReplicationClients extends Thread {
             }
         }
         catch (Exception e){
-            System.out.println(e.getStackTrace());
+            e.getStackTrace();
+            System.out.println("message: " + e.getMessage());
             System.out.println("explote :)");
         }
     }

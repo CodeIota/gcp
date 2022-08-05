@@ -33,10 +33,11 @@ public class ReplicationControl extends Thread {
     protected ObjectOutputStream outputStream;
 
     private void BackUp() throws Exception {
-        ValidatePorts();
+        System.out.println("-- Iniciando BackUp --"); 
         List<PortConnexion> conexiones = new ArrayList<>();
         for (int i = 0; i < Ports.size(); i++){
             System.out.println("estoy aqui con i: " + i);
+            System.out.println("server: " + Servers.get(i) + " port: " + Ports.get(i));
             conexiones.add(new PortConnexion(Servers.get(i), Ports.get(i)));
             //Se manda el comando de Backup
             conexiones.get(i).SendString(CommandBackUp);
@@ -45,7 +46,7 @@ public class ReplicationControl extends Thread {
 
             Boolean algo = conexiones.get(i).ReadBoolean();
 
-
+            System.out.println(algo);
 
             if(!algo){
 
